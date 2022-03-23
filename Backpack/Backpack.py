@@ -49,7 +49,7 @@ def validaze_individual(individual):
     return new_individual
 
 
-def mutation(population, indiv_prob=0.4, value_prob=0.3):
+def mutation(population, indiv_prob=0.2, value_prob=0.3):
     new_population = []
     for individual in population:
         if random.random() < indiv_prob:
