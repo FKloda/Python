@@ -1,0 +1,65 @@
+1. domaci ukol - Problem batohu
+F. Kloda
+
+Kodovani jedince:
+	Ve svem reseni jsem zvolil binarni kodovani jedince.
+	Ze vstupniho souboru se vytvori dva listy, jeden popisuje ceny predmetu a druhy jejich vahy.
+	Oba tyto listy maji stejnou delku a stejne pozice odpovidaji stejnemu predmetu.
+	Jedinec je kodovany pomoci listu stejne delky jako predesle dva zminene a obsahuje hodnoty 0 a 1.
+	1 znaci, ze je predmet v batohu.
+	Zminena reprezentace mi prisla jako nejjednodussi, coz je take duvod, proc jsem ji zvolil.
+
+Validace jedince:
+	Aby se zajistilo, ze kazdy jedinec je validni, provadi se po kazdem procesu, ktery tvori/meni 
+	jedince validacni funkce.
+	Tato funkce secte vahy vsech predmetu, ktere jedinec ma v batohu.
+	Pokud je vysledna vaha jedince vetsi nez je limit, odebere se nahodny predmet z jedincova batohu
+	a opakuje se validacni proces.
+
+Generovani populace:
+	Inicialni populace se vytvori tak, ze se po jednom vyvari jedinci, kteri maji na kazde pozici
+	s pravdepodobnosti 1/2 1 a s pravdepodobnosti 1/2 0.
+	Tito jedinci se pote zvaliduji.
+
+Fitness:
+	Diky tomu, ze vsichni jedinci jsou validni se fitness spocita jako soucet cen predmetu v batohu.
+
+
+Selekce:
+	K selekci jsem zvolil ruletovou selekci. 
+	Zkousel jsem take turnajovou selekci, ale pri testovani vychazely prumerne odhady s pouzitim 
+	ruletove selekce lepsi, nez s turnajovou selekci. 
+	V ramci zvyhodneni pozitivnich mutaci a celovemu zrychleni konvergence k maximu jsem po selekci
+	do vznikle populace pridal nejlepsiho jedince z minule populace.
+	Pozoroval jsem totiz, ze bez tohoto prvku se celkem brzy ustanovi maximalni hodnota v populaci,
+	ktera jen zridka vzroste na stabilni hladinu (kdyz uz, tak brzy klesla maximalni fitness na predchozi
+	hodnotu)
+	Tedy jsem zavedl elitarsky princip.
+
+Mutace:
+	Mutace probiha klasickym zpusobem, kazdy jedinec ma pravdepodobnost 0.4 ze u nej dojde k mutacim.
+	Pokud k tomu dojde, ma kazda slozka daneho jedince pravdepodobnost 0.4 ze zmeni svou hodnotu.
+	Po mutacnim kroku jsem opet aplikoval elitarsy pristup a opet do populace vlozil nejlepsiho jedince 
+	z minule populace.
+	Vzhledem k tomu, ze jsem do populace vzdy pridaval nejlepsiho jedince z minule populace (a to jak
+	pred krizenim tak po mutacich), tak mam jistotu, ze alespon cast populace ma rozumne hodnoty, ktere
+	mohou teoreticky vest k idealnimu reseni.
+	Proto mam nastavene pravdepodobnosti mutaci na tak vysoke hodnoty - casto se mi stavalo, ze se evoluce
+	"zasekla" a navic takto jsem dostaval vysledky nejblize maxima.
+
+Krizeni:
+	Pro krizeni jsem zvolil dvoubodove krizeni.
+	Zkousel jsem i jednobodove, ale dvoubodova varianta prinasela lepsi vysledky.
+
+Vystupem evoluce je nejlepsi jedinec v posledni generaci.
+Vzhledem k tomu, ze v prubehu vzdy do populace pridavam nejlepsiho jedince minule populace,
+muze se fitness soucasneho nejlepsiho jedince pouze zvysovat. Z toho duvodu neni nutne pamatovat si 
+stranou nejlepsiho nalezeneho jedince.
+Velikost populace mam nastavenou na 300 a pocet generaci na 200. 
+S tak castymi mutacemi, jako mam nastavene by bylo nejvyhodnejsi mit dlouhou dobu evoluce, ale i s timto pristupem
+se vetsina vysledku blizi optimu a povetsinou alespon jeden z deseti testu ho dosahne (snad)
+
+Vysledky:
+input_data_100.txt : 9147
+input_data_1000.txt : 14388 (neni konecna hodnota)
+	
