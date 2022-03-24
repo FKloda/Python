@@ -51,7 +51,7 @@ def validaze_individual(individual):
     return new_individual
 
 
-def mutation(population, indiv_prob=0.2, value_prob=0.1):
+def mutation(population, indiv_prob=0.2, value_prob=0.15):
     new_population = []
     for individual in population:
         if random.random() < indiv_prob:
@@ -66,8 +66,6 @@ def mutation(population, indiv_prob=0.2, value_prob=0.1):
 def create_random_population(population_size):
     population = []
     for i in range(0, population_size):
-        #individual = np.random.choice([0, 1], size=(individual_size,), p=[3/4, 1/4])
-        #individual = validaze_individual(individual)
         individual = np.zeros(individual_size)
         weight = 0
         while True:
@@ -161,7 +159,7 @@ def evolution(population_size, max_generations):
         mutated_population = mutation(offsprings)
         population = mutated_population
         population[random.randint(0, len(selected)-1)] = best_individual
-        print(i)
+        # print(i)
 
     fitness_value = list(map(fitness, population))
     max_fitness.append(max(fitness_value))
@@ -172,20 +170,20 @@ def evolution(population_size, max_generations):
     return best_individual, population, max_fitness
 
 
-individual_size, capacity, values, weights = read_input("Data_1000.txt")
+individual_size, capacity, values, weights = read_input("Data_100.txt")
 fitness_all_time = []
-# for _ in range (1, 10):
-best, population, max_fitness = evolution(population_size=200, max_generations=200)
+for _ in range (1, 6):
+    best, population, max_fitness = evolution(population_size=200, max_generations=300)
 
-fitness_all_time.extend(max_fitness)
-print('best fitness: ', fitness(best))
-# print('best individual: ', best)
-individual_weight = 0
-for i in range(0, len(best)):
-    if best[i] == 1:
-        individual_weight += weights[i]
-print('his weight: ', individual_weight)
-print('max weight: ', capacity)
+    fitness_all_time.extend(max_fitness)
+    print('best fitness: ', fitness(best))
+    # print('best individual: ', best)
+    individual_weight = 0
+    for i in range(0, len(best)):
+        if best[i] == 1:
+            individual_weight += weights[i]
+    print('his weight: ', individual_weight)
+    print('max weight: ', capacity)
 
 
 plt.plot(fitness_all_time)

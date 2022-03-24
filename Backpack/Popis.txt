@@ -13,13 +13,12 @@ Validace jedince:
 	Aby se zajistilo, ze kazdy jedinec je validni, provadi se po kazdem procesu, ktery tvori/meni 
 	jedince validacni funkce.
 	Tato funkce secte vahy vsech predmetu, ktere jedinec ma v batohu.
-	Pokud je vysledna vaha jedince vetsi nez je limit, odebere se nahodny predmet z jedincova batohu
-	a opakuje se validacni proces.
+	Pokud je vysledna vaha jedince vetsi nez je limit, odebere se nahodny predmet z jedincova batohu.
+	Tento cyklus se opakuje, dokud neni vaha jedince ok.
 
 Generovani populace:
-	Inicialni populace se vytvori tak, ze se po jednom vyvari jedinci, kteri maji na kazde pozici
-	s pravdepodobnosti 1/2 1 a s pravdepodobnosti 1/2 0.
-	Tito jedinci se pote zvaliduji.
+	Inicialni populace se vytvori tak, ze se po jednom vyvari jedinci, kterym se pridavaji nahodne predmety
+	do batohu dokud neni batoh plny (tedy dokud se poprve nestane, ze se tam nejaky predmet nevejde).
 
 Fitness:
 	Diky tomu, ze vsichni jedinci jsou validni se fitness spocita jako soucet cen predmetu v batohu.
@@ -37,8 +36,8 @@ Selekce:
 	Tedy jsem zavedl elitarsky princip.
 
 Mutace:
-	Mutace probiha klasickym zpusobem, kazdy jedinec ma pravdepodobnost 0.4 ze u nej dojde k mutacim.
-	Pokud k tomu dojde, ma kazda slozka daneho jedince pravdepodobnost 0.4 ze zmeni svou hodnotu.
+	Mutace probiha klasickym zpusobem, kazdy jedinec ma pravdepodobnost 0.2 ze u nej dojde k mutacim.
+	Pokud k tomu dojde, ma kazda slozka daneho jedince pravdepodobnost 0.15 ze zmeni svou hodnotu.
 	Po mutacnim kroku jsem opet aplikoval elitarsy pristup a opet do populace vlozil nejlepsiho jedince 
 	z minule populace.
 	Vzhledem k tomu, ze jsem do populace vzdy pridaval nejlepsiho jedince z minule populace (a to jak
@@ -61,5 +60,5 @@ se vetsina vysledku blizi optimu a povetsinou alespon jeden z deseti testu ho do
 
 Vysledky:
 input_data_100.txt : 9147
-input_data_1000.txt : 22871 (neni konecna hodnota - potreba delsi evoluce)
+input_data_1000.txt : 26240
 	
