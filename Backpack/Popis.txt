@@ -61,5 +61,5 @@ se vetsina vysledku blizi optimu a povetsinou alespon jeden z deseti testu ho do
 
 Vysledky:
 input_data_100.txt : 9147
-input_data_1000.txt : 17188 (neni konecna hodnota - potreba delsi evoluce)
+input_data_1000.txt : 22871 (neni konecna hodnota - potreba delsi evoluce)
 	
